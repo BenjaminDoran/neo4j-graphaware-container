@@ -1,13 +1,18 @@
-version: '0'
+version: '1.0'
 services:
   neodb:
-    image: 'neo4j:3.3.0'
+    image: 'neo4j:3.3.1'
+    container_name: neodb
     environment:
     - NEO4J_dbms_memory_heap_initial__size=3G
     - NEO4J_dbms_memory_heap_max__size=3G
+    - NEO4J_dbms_unmanaged__extension__classes=com.graphaware.server=/graphaware
+    - NEO4J_com_graphaware_runtime_enabled=true
+    - NEO4J_com_graphaware_module_NLP_1=com.graphaware.nlp.module.NLPBootstrapper
+    - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+    - NEO4J_dbms_security_procedures_whitelist=ga.nlp.*,apoc.*
     ports:
     - '7474:7474'
     - '7687:7687'
     volumes:
-    - ./plugins:/var/lib/neo4j/plugins
-    - ./conf:/var/lib/neo4j/conf
+    - ./plugins:/plugins
