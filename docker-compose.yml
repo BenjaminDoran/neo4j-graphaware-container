@@ -1,4 +1,4 @@
-version: '1.0'
+version: '0'
 services:
   neodb:
     image: 'neo4j:3.3.1'
